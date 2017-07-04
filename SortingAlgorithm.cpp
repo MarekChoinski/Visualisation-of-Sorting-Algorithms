@@ -13,53 +13,35 @@ SortingAlgorithm::SortingAlgorithm(sf::RenderWindow& win) : m_window(&win)
     std::iota(number.rbegin(), number.rend(), 0);
     //randomize array
     std::shuffle(number.begin(), number.end(), std::mt19937{std::random_device{}()});
-
-    //make image used later as a texture
-    im_texture.create(1,1,sf::Color::White);
-    im_texture_sorted.create(1,1,sf::Color::Green);
-
-    //make texture (1x1 white pixel)
-    texture.loadFromImage(im_texture);
-
-    //set texture to pixels (1x1 white pixel)
-    //pixels are sprites
-    for (auto& i : piksel)
-    i.setTexture(texture);
 }
 
-//set position of pixels depending of numbers
+
 void SortingAlgorithm::setPostionOfPixels()
 {
     int j=0;
     for (auto& i : piksel)
     {
-        i.setPosition(j, number[j]);
+        i =  sf::Vertex(sf::Vector2f(j, number[j]), sf::Color::White);
         j++;
     }
 }
 
 
-void SortingAlgorithm::drawing()//sf::RenderWindow& window
+void SortingAlgorithm::drawing()
 {
 
     while (m_window->isOpen()) {
-
             m_window->setActive(true);
+
             m_window->clear(sf::Color::Black);
 
-                setPostionOfPixels();
+        setPostionOfPixels();
 
-                for (auto& i : piksel)
-                    m_window->draw(i);
-
-
+        for(const auto p: piksel)
+            m_window->draw(&p, 1, sf::Points);
 
 
             m_window->display();
-
-
-
-
 
     sf::sleep(sf::milliseconds(m_display_delay));
 
@@ -67,12 +49,11 @@ void SortingAlgorithm::drawing()//sf::RenderWindow& window
 }
 
 
-
 void SortingAlgorithm::sorted()
 {
     for(int i=m_amount; i>0; i--)
     {
-        piksel[i].setColor(sf::Color::Green);
+        piksel[i].color = sf::Color::Green;
         sf::sleep(sf::milliseconds(m_already_sorted_delay));
     }
 }
@@ -98,4 +79,3 @@ void SortingAlgorithm::start()
             sf::sleep(sf::milliseconds(m_event_delay));
     }
 }
-

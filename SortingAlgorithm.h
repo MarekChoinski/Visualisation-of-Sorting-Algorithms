@@ -39,16 +39,8 @@ class SortingAlgorithm
 
 
 
-        //array of one-pixel sprites representing numbers
-        std::vector<sf::Sprite> piksel;
-
-        //white 1x1 image used for texturing pixels
-        sf::Image im_texture;
-        //green 1x1 image used for texturing sorted pixels
-        sf::Image im_texture_sorted;
-
-        //texture used to texturing pixels
-        sf::Texture texture;
+        //one-pixel vertex representing numbers
+        std::vector<sf::Vertex> piksel;
 
         //DELAYS ARE FOR OPTIMALIZATION AND SPEED OF ANIMATION
         //delay of displaying pixels (something like FPS)
