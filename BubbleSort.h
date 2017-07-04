@@ -7,7 +7,7 @@
 class BubbleSort : public SortingAlgorithm
 {
     public:
-        explicit BubbleSort(sf::RenderWindow& win);
+        BubbleSort(sf::RenderWindow& win);
         virtual void sorting() override;
 
     private:
