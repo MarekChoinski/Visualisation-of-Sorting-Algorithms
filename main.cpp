@@ -11,8 +11,10 @@ int main()
     sf::RenderWindow window(sf::VideoMode(_SIZE,_SIZE), "Sorting Visualisation", sf::Style::Close);
     window.setActive(false);
 
-    BubbleSort bubbleAlg(window);
+
+    BubbleSort bubbleAlg(window, 5);
     bubbleAlg.start();
+
 
     return 0;
 }

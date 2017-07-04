@@ -1,10 +1,10 @@
 #include "BubbleSort.h"
 
-BubbleSort::BubbleSort(sf::RenderWindow& win) : SortingAlgorithm::SortingAlgorithm(win)
+BubbleSort::BubbleSort(sf::RenderWindow& win, int i_sort_delay) : SortingAlgorithm::SortingAlgorithm(win, i_sort_delay)
 {
 }
 
-void BubbleSort::sorting()//sf::RenderWindow& window
+void BubbleSort::sorting()
 {
     for(int i=0;i<m_amount;i++)
     {

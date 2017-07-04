@@ -1,6 +1,6 @@
 #include "SortingAlgorithm.h"
 
-SortingAlgorithm::SortingAlgorithm(sf::RenderWindow& win) : m_window(&win)
+SortingAlgorithm::SortingAlgorithm(sf::RenderWindow& win, int i_sort_delay) : m_window(&win), m_sort_delay(i_sort_delay)
 {
     //resize arrays with size depending on window size
     piksel.resize(m_window->getSize().x);
@@ -13,6 +13,13 @@ SortingAlgorithm::SortingAlgorithm(sf::RenderWindow& win) : m_window(&win)
     std::iota(number.rbegin(), number.rend(), 0);
     //randomize array
     std::shuffle(number.begin(), number.end(), std::mt19937{std::random_device{}()});
+
+    int j=0;
+    for (auto& i : piksel)
+    {
+        i =  sf::Vertex(sf::Vector2f(j, number[j]), sf::Color::White);
+        j++;
+    }
 }
 
 
@@ -21,7 +28,7 @@ void SortingAlgorithm::setPostionOfPixels()
     int j=0;
     for (auto& i : piksel)
     {
-        i =  sf::Vertex(sf::Vector2f(j, number[j]), sf::Color::White);
+        i.position.y = number[j];//i =  sf::Vertex(sf::Vector2f(j, number[j]), sf::Color::White);
         j++;
     }
 }
@@ -61,10 +68,10 @@ void SortingAlgorithm::sorted()
 
 void SortingAlgorithm::start()
 {
-    std::thread thr_d([=]{drawing();});//, &window
+    std::thread thr_d([=]{drawing();});
         thr_d.detach();
 
-    std::thread thr_s([=]{sorting();});//, &window
+    std::thread thr_s([=]{sorting();});
         thr_s.detach();
 
     while (m_window->isOpen())

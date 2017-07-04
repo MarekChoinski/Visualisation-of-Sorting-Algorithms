@@ -12,8 +12,8 @@
 class SortingAlgorithm
 {
     public:
-        //Constructor
-        SortingAlgorithm(sf::RenderWindow& win);
+        //Constructor taking RenderWindow reference and sorting delay
+        SortingAlgorithm(sf::RenderWindow& win, int i_sort_delay=50);
         //function starts drawing, sorting and handling window events
         void start();
 
@@ -27,7 +27,7 @@ class SortingAlgorithm
         int m_amount;
         //delay of sorting algorithm
         //less means faster sorting
-        const int m_sort_delay=50;
+        int m_sort_delay;
         //coloring sorted line to green color
         void sorted();
 
@@ -44,7 +44,7 @@ class SortingAlgorithm
 
         //DELAYS ARE FOR OPTIMALIZATION AND SPEED OF ANIMATION
         //delay of displaying pixels (something like FPS)
-        const int m_display_delay=100;
+        const int m_display_delay=0;
         //delay of green animation
         const int m_already_sorted_delay=5;
         //delay of system events like closing window etc.
