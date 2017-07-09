@@ -63,6 +63,8 @@ void SortingAlgorithm::sorted()
         piksel[i].color = sf::Color::Green;
         sf::sleep(sf::milliseconds(m_already_sorted_delay));
     }
+    sf::sleep(sf::milliseconds(1000));
+    m_window->close();
 }
 
 
