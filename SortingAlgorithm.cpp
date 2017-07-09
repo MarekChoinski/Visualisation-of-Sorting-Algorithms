@@ -1,4 +1,4 @@
-#include "SortingAlgorithm.h"
+ #include "SortingAlgorithm.h"
 
 SortingAlgorithm::SortingAlgorithm(sf::RenderWindow& win, int i_sort_delay) : m_window(&win), m_sort_delay(i_sort_delay)
 {
@@ -70,7 +70,9 @@ void SortingAlgorithm::sorted()
 
 void SortingAlgorithm::start()
 {
+	bool forceQuit = false;
     std::thread thr_d([=]{drawing();});
+
     std::thread thr_s([=]{sorting();});
 
     while (m_window->isOpen())
@@ -78,13 +80,24 @@ void SortingAlgorithm::start()
         sf::Event event;
         while (m_window->pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                m_window->close();
+			if (event.type == sf::Event::Closed)
+			{
+				m_window->close();
+				forceQuit = true;
+			}
         }
 
             sf::sleep(sf::milliseconds(m_event_delay));
     }
-    
-	thr_d.~thread();
-	thr_s.~thread();
+	if (forceQuit)
+	{
+		thr_s.~thread();
+		thr_d.~thread();
+	}
+	else
+	{
+
+		thr_s.join();
+		thr_d.join();
+	}
 }
