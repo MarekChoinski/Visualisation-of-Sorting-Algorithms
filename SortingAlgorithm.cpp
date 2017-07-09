@@ -69,10 +69,7 @@ void SortingAlgorithm::sorted()
 void SortingAlgorithm::start()
 {
     std::thread thr_d([=]{drawing();});
-        thr_d.detach();
-
     std::thread thr_s([=]{sorting();});
-        thr_s.detach();
 
     while (m_window->isOpen())
     {
@@ -85,4 +82,7 @@ void SortingAlgorithm::start()
 
             sf::sleep(sf::milliseconds(m_event_delay));
     }
+    
+	thr_d.~thread();
+	thr_s.~thread();
 }
